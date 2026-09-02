@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planos · VideoTool</title>
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+
+  <div class="plans-shell">
+    <div class="auth-topbar">
+      <div class="app-brand-name">VideoTool</div>
+      <button class="theme-toggle" id="theme-toggle" aria-pressed="false">Modo escuro</button>
+    </div>
+
+    <div class="plans-body">
+      <div class="plans-header">
+        <h1>Escolha seu plano</h1>
+        <p>Tokens para usar em todas as ferramentas de imagem e vídeo</p>
+      </div>
+
+      <div class="plans-grid" id="plans-grid">
+        <div class="card plan-card" data-plan="free">
+          <div class="plan-name">Gratuito</div>
+          <div class="plan-price">R$0<span>/mês</span></div>
+          <div class="plan-features">
+            <span>50 tokens por mês</span>
+            <span>Geração de imagens limitada</span>
+            <span>Marca d'água nos resultados</span>
+          </div>
+          <button class="btn btn-block select-plan-btn" data-plan="free">Plano atual</button>
+        </div>
+
+        <div class="card plan-card is-featured" data-plan="pro">
+          <div class="plan-name">Pro</div>
+          <div class="plan-price">R$29<span>/mês</span></div>
+          <div class="plan-features">
+            <span>1.000 tokens por mês</span>
+            <span>Todas as ferramentas de imagem</span>
+            <span>Texto para vídeo</span>
+            <span>Sem marca d'água</span>
+          </div>
+          <button class="btn btn-primary btn-block select-plan-btn" data-plan="pro">Assinar Pro</button>
+        </div>
+
+        <div class="card plan-card" data-plan="premium">
+          <div class="plan-name">Premium</div>
+          <div class="plan-price">R$79<span>/mês</span></div>
+          <div class="plan-features">
+            <span>5.000 tokens por mês</span>
+            <span>Tudo do plano Pro</span>
+            <span>Fila de processamento prioritária</span>
+            <span>Suporte prioritário</span>
+          </div>
+          <button class="btn btn-block select-plan-btn" data-plan="premium">Assinar Premium</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/theme.js"></script>
+  <script>
+    // TODO: implementar a assinatura real (checkout / pagamento) e atualizar
+    // database.json -> users[].plan quando o pagamento for confirmado.
+    document.querySelectorAll(".select-plan-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const planId = button.dataset.plan;
+        // TODO: iniciar o fluxo de checkout para "planId".
+      });
+    });
+  </script>
+</body>
+</html>

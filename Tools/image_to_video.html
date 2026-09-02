@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imagem para vídeo · VideoTool</title>
+  <link rel="stylesheet" href="../styles/main.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <div class="app-brand">
+      <div class="app-brand-name">VideoTool<span>Ferramentas</span></div>
+    </div>
+
+    <header class="app-header">
+      <div class="app-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" placeholder="Buscar funções" />
+      </div>
+
+      <div class="app-header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-pressed="false">Modo escuro</button>
+        <button class="btn" id="logout-btn">Sair</button>
+        <div class="token-badge">
+          <span class="token-label">Tokens</span>
+          <span id="token-balance" data-placeholder="120">120</span>
+        </div>
+        <div class="user-avatar" id="user-avatar" title="Minha conta">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"></circle>
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <nav class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">Estúdio</div>
+        <a class="sidebar-link" href="../Studio/Video.html">Vídeos</a>
+        <a class="sidebar-link" href="../Studio/Images.html">Imagens</a>
+        <a class="sidebar-link" href="../Studio/history.html">Histórico</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">Ferramentas e funções</div>
+        <a class="sidebar-link" href="generate_image.html">Gerar imagem</a>
+        <a class="sidebar-link" href="better_images.html">Melhorar imagem</a>
+        <a class="sidebar-link" href="expanded_images.html">Expandir imagem</a>
+        <a class="sidebar-link" href="remove_background.html">Remover fundo</a>
+        <a class="sidebar-link" href="image_to_video.html">Imagem para vídeo</a>
+        <a class="sidebar-link" href="text_to_video.html">Texto para vídeo</a>
+      </div>
+    </nav>
+
+    <main class="app-main">
+      <div class="main-content">
+        <h1 class="main-content-title">Ferramenta selecionada: Imagem para vídeo</h1>
+
+        <div class="workspace-grid">
+          <section class="card workspace-panel">
+            <div class="field">
+              <label for="upload-input">Imagem original</label>
+              <div class="upload-dropzone" id="upload-dropzone">
+                Arraste uma imagem ou clique para enviar
+                <input type="file" id="upload-input" accept="image/*" hidden />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="motion-select">Movimento da câmera</label>
+              <select id="motion-select">
+                <option value="static">Estático</option>
+                <option value="zoom-in">Zoom in</option>
+                <option value="zoom-out">Zoom out</option>
+                <option value="pan">Panorâmica</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="duration-select">Duração</label>
+              <select id="duration-select">
+                <option value="3">3 segundos</option>
+                <option value="5">5 segundos</option>
+                <option value="10">10 segundos</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary btn-block" id="generate-btn">Gerar vídeo</button>
+          </section>
+
+          <section class="card workspace-preview" id="result-preview">
+            O vídeo gerado vai aparecer aqui
+          </section>
+        </div>
+      </div>
+
+      <div class="main-footer">
+        <button id="import-btn">Importar</button>
+        <button id="export-btn">Exportar</button>
+        <button id="print-btn">Imprimir</button>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Espaço para API de IA: usa API_CONFIG.imageToVideo em scripts/api-config.js -->
+  <script src="../scripts/api-config.js"></script>
+  <script src="../scripts/theme.js"></script>
+  <script src="../scripts/app.js"></script>
+  <script>
+    // TODO: enviar a imagem + parâmetros para callAiApi(API_CONFIG.imageToVideo, payload)
+    // e mostrar o vídeo resultante em #result-preview.
+  </script>
+</body>
+</html>
