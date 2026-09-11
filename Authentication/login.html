@@ -52,18 +52,24 @@
     function validateFields(){
 
     const email = document.getElementById("email").value;
-    if (!email){
+    if (!validateEmail(email)) {
       reportError("Por favor, insira um e-mail válido.");
       return false;
     }
 
     const password = document.getElementById("password").value;
-    if (!password) {
+    if (!validatePassword(password)) {
       reportError("Por favor, insira uma senha válida.");
       return false;
     }
-    function 
-     // TODO: validar credenciais e redirecionar para "../Studio/Video.html" em caso de sucesso
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+    function validatePassword(password) {
+      return password.length >= 8;
+    }
+    // TODO: validar credenciais e redirecionar para "../Studio/Video.html" em caso de sucesso
     };
   </script>
 </body>
