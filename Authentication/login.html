@@ -53,11 +53,16 @@
 
     const email = document.getElementById("email").value;
     if (!email){
-      
-      document.getElementById('recover-password-button')
+      reportError("Por favor, insira um e-mail válido.");
+      return false;
     }
 
-
+    const password = document.getElementById("password").value;
+    if (!password) {
+      reportError("Por favor, insira uma senha válida.");
+      return false;
+    }
+    function 
      // TODO: validar credenciais e redirecionar para "../Studio/Video.html" em caso de sucesso
     };
   </script>
