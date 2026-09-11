@@ -19,15 +19,15 @@
         <h1 class="auth-title">Entrar</h1>
         <p class="auth-subtitle">Acesse sua conta para continuar</p>
 
-        <form id="login-form">
+        <form id="login">
           <div class="field">
-            <label for="email-input">E-mail</label>
-            <input type="email" id="email-input" name="email" required placeholder="voce@exemplo.com" />
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="voce@exemplo.com" />
           </div>
 
           <div class="field">
             <label for="password-input">Senha</label>
-            <input type="password" id="password-input" name="password" required placeholder="••••••••" />
+            <input type="password" id="password" name="password" required placeholder="••••••••" />
           </div>
 
           <button type="submit" class="btn btn-primary btn-block" id="login-btn">Entrar</button>
@@ -49,10 +49,17 @@
   <script src="../scripts/theme.js"></script>
   <script>
     // TODO: implementar a autenticação real (chamada ao back-end / banco de dados).
-    document.getElementById("login-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      // TODO: validar credenciais e redirecionar para "../Studio/Video.html" em caso de sucesso.
-    });
+    function validateFields(){
+
+    const email = document.getElementById("email").value;
+    if (!email){
+      
+      document.getElementById('recover-password-button')
+    }
+
+
+     // TODO: validar credenciais e redirecionar para "../Studio/Video.html" em caso de sucesso
+    };
   </script>
 </body>
 </html>
