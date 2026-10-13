@@ -40,6 +40,8 @@
             <input type="password" id="confirm-password-input" name="confirmPassword" required placeholder="••••••••" />
           </div>
 
+          <p class="form-error" id="register-error" role="alert" hidden></p>
+
           <button type="submit" class="btn btn-primary btn-block" id="register-btn">Criar conta</button>
         </form>
 
@@ -53,11 +55,54 @@
   </div>
 
   <script src="../scripts/theme.js"></script>
+  <script src="../scripts/api-client.js"></script>
   <script>
-    // TODO: implementar o cadastro real (validar senha, salvar no banco de dados).
-    document.getElementById("register-form").addEventListener("submit", (event) => {
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const form = document.getElementById("register-form");
+    const errorBox = document.getElementById("register-error");
+    const submitButton = document.getElementById("register-btn");
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.hidden = false;
+    }
+
+    function clearError() {
+      errorBox.textContent = "";
+      errorBox.hidden = true;
+    }
+
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      // TODO: criar o usuário e redirecionar para "login.html" ou já autenticar.
+      clearError();
+
+      const name = document.getElementById("name-input").value.trim();
+      const email = document.getElementById("email-input").value.trim();
+      const password = document.getElementById("password-input").value;
+      const confirmPassword = document.getElementById("confirm-password-input").value;
+
+      if (name.length < 2) return showError("Informe seu nome.");
+      if (!EMAIL_REGEX.test(email)) return showError("Por favor, insira um e-mail válido.");
+      if (password.length < 8) return showError("A senha deve ter pelo menos 8 caracteres.");
+      if (password !== confirmPassword) return showError("As senhas não conferem.");
+
+      const originalLabel = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = "Criando conta...";
+
+      try {
+        // O cadastro ja devolve o token: a pessoa entra logada.
+        const { token } = await apiRequest("/api/auth/register", {
+          method: "POST",
+          body: { name, email, password },
+        });
+        setToken(token);
+        window.location.href = "../Studio/Video.html";
+      } catch (error) {
+        showError(error.message);
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }
     });
   </script>
 </body>

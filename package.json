@@ -2,7 +2,7 @@
   "name": "videotool-backend",
   "version": "1.0.0",
   "description": "Backend simples do VideoTool: conecta no MySQL e expoe rotas para o front-end.",
-  "main": "server.js",
+  "main": "scripts/server.js",
   "scripts": {
     "start": "node scripts/server.js"
   },

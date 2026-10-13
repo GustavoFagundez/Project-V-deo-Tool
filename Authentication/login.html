@@ -26,9 +26,11 @@
           </div>
 
           <div class="field">
-            <label for="password-input">Senha</label>
+            <label for="password">Senha</label>
             <input type="password" id="password" name="password" required placeholder="••••••••" />
           </div>
+
+          <p class="form-error" id="login-error" role="alert" hidden></p>
 
           <button type="submit" class="btn btn-primary btn-block" id="login-btn">Entrar</button>
         </form>
@@ -47,30 +49,50 @@
   </div>
 
   <script src="../scripts/theme.js"></script>
+  <script src="../scripts/api-client.js"></script>
   <script>
-    // TODO: implementar a autenticação real (chamada ao back-end / banco de dados).
-    function validateFields(){
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const form = document.getElementById("login");
+    const errorBox = document.getElementById("login-error");
+    const submitButton = document.getElementById("login-btn");
 
-    const email = document.getElementById("email").value;
-    if (!validateEmail(email)) {
-      reportError("Por favor, insira um e-mail válido.");
-      return false;
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.hidden = false;
     }
 
-    const password = document.getElementById("password").value;
-    if (!validatePassword(password)) {
-      reportError("Por favor, insira uma senha válida.");
-      return false;
+    function clearError() {
+      errorBox.textContent = "";
+      errorBox.hidden = true;
     }
-    function validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
-    }
-    function validatePassword(password) {
-      return password.length >= 8;
-    }
-    // TODO: validar credenciais e redirecionar para "../Studio/Video.html" em caso de sucesso
-    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearError();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!EMAIL_REGEX.test(email)) return showError("Por favor, insira um e-mail válido.");
+      if (password.length < 8) return showError("A senha deve ter pelo menos 8 caracteres.");
+
+      const originalLabel = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = "Entrando...";
+
+      try {
+        const { token } = await apiRequest("/api/auth/login", {
+          method: "POST",
+          body: { email, password },
+        });
+        setToken(token);
+        window.location.href = "../Studio/Video.html";
+      } catch (error) {
+        showError(error.message);
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+      }
+    });
   </script>
 </body>
 </html>

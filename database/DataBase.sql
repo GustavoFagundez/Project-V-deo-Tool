@@ -107,5 +107,7 @@ INSERT INTO tools (id, name, page, token_cost) VALUES
   ('image-to-video', 'Imagem para vídeo', 'Tools/image_to_video.html', 15),
   ('text-to-video', 'Texto para vídeo', 'Tools/text_to_video.html', 20);
 
+-- Usuario de exemplo para testar o login:
+--   e-mail: usuario@exemplo.com    senha: senha12345
 INSERT INTO users (id, name, email, password_hash, tokens, plan_id) VALUES
-  ('usr_001', 'Usuário Exemplo', 'usuario@exemplo.com', 'TODO_hash_da_senha', 120, 'free');
+  ('usr_001', 'Usuário Exemplo', 'usuario@exemplo.com', '$2b$12$3K9lnVfp9vug1ceUqRpfq.QmkOlHYC2ECCAwGENWbzkWfzLujBYU.', 120, 'free');
